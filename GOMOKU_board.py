@@ -1,7 +1,7 @@
 BOARD_SIZE = 15
 EMPTY = "."
-PLAYER1 = "X"
-PLAYER2 = "O"
+PLAYER1 = "x"
+PLAYER2 = "o"
 
 def create_board():
     return [[EMPTY for _ in range(BOARD_SIZE)] for _ in range(BOARD_SIZE)]
