@@ -1,4 +1,3 @@
-###
 BOARD_SIZE = 15
 EMPTY = "."
 PLAYER1 = "X"
