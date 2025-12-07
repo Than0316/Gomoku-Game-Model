@@ -1,4 +1,4 @@
-from zobrist import Zobrist
+#from zobrist import Zobrist #hashing
 from cache import Cache
 from eval import Evaluate, FIVE
 
