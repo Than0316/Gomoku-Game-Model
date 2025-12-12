@@ -1,143 +1,185 @@
-import re
+from enum import IntEnum
 
-# Patterns for string matching (optional, mostly for reference)
-patterns = {
-    'five': re.compile('11111'),
-    'blockfive': re.compile('211111|111112'),
-    'four': re.compile('011110'),
-    'blockFour': re.compile(
-        '10111|11011|11101|211110|211101|211011|210111|011112|101112|110112|111012'
-    ),
-    'three': re.compile('011100|011010|010110|001110'),
-    'blockThree': re.compile('211100|211010|210110|001112|010112|011012'),
-    'two': re.compile('001100|011000|000110|010100|001010'),
-}
-
-# Shape constants
-class Shapes:
+class ShapeType(IntEnum):
+    """
+    Enum representing the different shapes and their heuristic scores.
+    These values match the logic in the JS 'shapes' constant.
+    """
     FIVE = 5
-    BLOCK_FIVE = 50
-    FOUR = 4
-    FOUR_FOUR = 44       # 双冲四
-    FOUR_THREE = 43      # 冲四活三
-    THREE_THREE = 33     # 双三
-    BLOCK_FOUR = 40
-    THREE = 3
-    BLOCK_THREE = 30
-    TWO_TWO = 22         # 双活二
-    TWO = 2
+    BLOCK_FIVE = 50  # Win but blocked on one side (still a win)
+    FOUR = 4         # Open four (guaranteed win next turn)
+    FOUR_FOUR = 44   # Double four
+    FOUR_THREE = 43  # Four and Three
+    THREE_THREE = 33 # Double three
+    BLOCK_FOUR = 40  # Closed four (needs another move to become 5)
+    THREE = 3        # Open three
+    BLOCK_THREE = 30 # Closed three
+    TWO_TWO = 22     # Double two
+    TWO = 2          # Open two
     NONE = 0
 
-# Performance counter (optional)
-performance = {
-    'five': 0, 'blockFive': 0, 'four': 0, 'blockFour': 0,
-    'three': 0, 'blockThree': 0, 'two': 0, 'none': 0, 'total': 0
-}
+class ShapeDetector:
+    """
+    Contains logic to detect shapes on the board.
+    Translates the 'getShapeFast' logic from the reference implementation.
+    """
 
+    @staticmethod
+    def get_shape(board_grid, x, y, offset_x, offset_y, role):
+        """
+        Analyzes the shape formed at (x, y) in the direction (offset_x, offset_y).
+        
+        Args:
+            board_grid: 2D array of the board.
+            x, y: Coordinates of the stone being analyzed.
+            offset_x, offset_y: Direction vector (e.g., (1, 0) for horizontal).
+            role: 1 (Black) or -1 (White).
+            
+        Returns:
+            (ShapeType, self_count)
+        """
+        size = len(board_grid)
+        
+        # Optimization: Check 2 steps out in both directions. 
+        # If both are strictly empty/out-of-bounds in a way that prevents 5, skip.
+        # (Simplified bounds check for Python safety)
+        if not (0 <= x + offset_x < size and 0 <= y + offset_y < size):
+            return ShapeType.NONE, 1
+            
+        # Scan 'left' (negative direction) and 'right' (positive direction)
+        left = ShapeDetector._count_shape(board_grid, x, y, -offset_x, -offset_y, role)
+        right = ShapeDetector._count_shape(board_grid, x, y, offset_x, offset_y, role)
 
-def count_shape(board, x, y, dx, dy, role):
-    opponent = -role
-    inner_empty = 0
-    temp_empty = 0
-    self_count = 0
-    total_length = 0
-    side_empty = 0
-    no_empty_self = 0
-    one_empty_self = 0
+        self_count = left['self_count'] + right['self_count'] + 1
+        total_length = left['total_length'] + right['total_length'] + 1
+        no_empty_self_count = left['no_empty_self_count'] + right['no_empty_self_count'] + 1
+        
+        # Calculates "One Jump" count (e.g., XX X)
+        one_empty_self_count = max(
+            left['one_empty_self_count'] + right['no_empty_self_count'],
+            left['no_empty_self_count'] + right['one_empty_self_count']
+        ) + 1
 
-    size = len(board)
+        left_empty = left['side_empty_count']
+        right_empty = right['side_empty_count']
 
-    for i in range(1, 6):
-        nx, ny = x + i * dx, y + i * dy
-        if not (0 <= nx < size and 0 <= ny < size):
-            break
-        current = board[nx][ny]
-        if current == 2 or current == opponent:
-            break
-        if current == role:
-            self_count += 1
-            side_empty = 0
-            if temp_empty:
-                inner_empty += temp_empty
-                temp_empty = 0
-            if inner_empty == 0:
-                no_empty_self += 1
-                one_empty_self += 1
-            elif inner_empty == 1:
-                one_empty_self += 1
-        total_length += 1
-        if current == 0:
-            temp_empty += 1
-            side_empty += 1
-        if side_empty >= 2:
-            break
-    if not inner_empty:
-        one_empty_self = 0
-    return {
-        'self_count': self_count, 'total_length': total_length,
-        'no_empty_self': no_empty_self, 'one_empty_self': one_empty_self,
-        'inner_empty': inner_empty, 'side_empty': side_empty
-    }
+        if total_length < 5:
+            return ShapeType.NONE, self_count
 
+        # --- Shape Classification Logic ---
+        
+        # Five in a row
+        if no_empty_self_count >= 5:
+            if left_empty > 0 and right_empty > 0:
+                return ShapeType.FIVE, self_count
+            else:
+                return ShapeType.BLOCK_FIVE, self_count
+        
+        # Four
+        if no_empty_self_count == 4:
+            # Check if it's an "Open Four" (Empty on both sides or special jump cases)
+            if (left_empty > 0 and right_empty > 0) or \
+               (left_empty > 0 and right['one_empty_self_count'] > right['no_empty_self_count']) or \
+               (right_empty > 0 and left['one_empty_self_count'] > left['no_empty_self_count']):
+                return ShapeType.FOUR, self_count
+            else:
+                return ShapeType.BLOCK_FOUR, self_count
 
-def get_shape_fast(board, x, y, dx, dy, role):
-    size = len(board)
-    if not (0 <= x+dx < size and 0 <= x-dx < size and 0 <= y+dy < size and 0 <= y-dy < size):
-        return Shapes.NONE, 1
+        # Blocked Four created by a jump (e.g., X XXX)
+        if one_empty_self_count == 4:
+            return ShapeType.BLOCK_FOUR, self_count
 
-    left = count_shape(board, x, y, -dx, -dy, role)
-    right = count_shape(board, x, y, dx, dy, role)
+        # Three
+        if no_empty_self_count == 3:
+            if (left_empty > 0 and right_empty > 0):
+                # We typically need more space for a true Open Three
+                if (left_empty >= 1 and right_empty >= 2) or (left_empty >= 2 and right_empty >= 1):
+                     return ShapeType.THREE, self_count
+                else:
+                     return ShapeType.BLOCK_THREE, self_count
+            else:
+                return ShapeType.BLOCK_THREE, self_count
+        
+        # Three with a jump (e.g., X XX)
+        if one_empty_self_count == 3:
+            if left_empty > 0 and right_empty > 0:
+                return ShapeType.THREE, self_count
+            else:
+                return ShapeType.BLOCK_THREE, self_count
 
-    self_count = left['self_count'] + right['self_count'] + 1
-    total_length = left['total_length'] + right['total_length'] + 1
-    no_empty_self = left['no_empty_self'] + right['no_empty_self'] + 1
-    one_empty_self = max(left['one_empty_self'] + right['no_empty_self'],
-                         left['no_empty_self'] + right['one_empty_self']) + 1
-    left_empty = left['side_empty']
-    right_empty = right['side_empty']
+        # Two (Open Two)
+        if no_empty_self_count == 2:
+            if left_empty > 0 and right_empty > 0 and total_length > 5: # Need space to grow
+                return ShapeType.TWO, self_count
 
-    shape = Shapes.NONE
+        return ShapeType.NONE, self_count
 
-    if total_length < 5:
-        return shape, self_count
-
-    if no_empty_self >= 5:
-        shape = Shapes.FIVE if left_empty > 0 and right_empty > 0 else Shapes.BLOCK_FIVE
-    elif no_empty_self == 4:
-        if (left_empty >= 1 or left['one_empty_self'] > left['no_empty_self']) and \
-           (right_empty >= 1 or right['one_empty_self'] > right['no_empty_self']):
-            shape = Shapes.FOUR
-        elif not (left_empty == 0 and right_empty == 0):
-            shape = Shapes.BLOCK_FOUR
-    elif one_empty_self == 4:
-        shape = Shapes.BLOCK_FOUR
-    elif no_empty_self == 3:
-        if (left_empty >= 2 and right_empty >= 1) or (left_empty >= 1 and right_empty >= 2):
-            shape = Shapes.THREE
-        else:
-            shape = Shapes.BLOCK_THREE
-    elif one_empty_self == 3:
-        shape = Shapes.THREE if left_empty >= 1 and right_empty >= 1 else Shapes.BLOCK_THREE
-    elif (no_empty_self == 2 or one_empty_self == 2) and total_length > 5:
-        shape = Shapes.TWO
-
-    return shape, self_count
-
-
-def is_five(shape):
-    return shape in (Shapes.FIVE, Shapes.BLOCK_FIVE)
-
-
-def is_four(shape):
-    return shape in (Shapes.FOUR, Shapes.BLOCK_FOUR)
-
-
-def get_all_shapes_of_point(shape_cache, x, y, role=None):
-    roles = [role] if role else [1, -1]
-    result = []
-    for r in roles:
-        for d in range(4):
-            shape = shape_cache[r][d][x][y]
-            if shape > 0:
-                result.append(shape)
-    return result
+    @staticmethod
+    def _count_shape(board, x, y, dx, dy, role):
+        """
+        Helper function to scan in one specific direction.
+        Returns detailed stats about stones and gaps found.
+        """
+        size = len(board)
+        opponent = -role
+        
+        inner_empty_count = 0
+        temp_empty_count = 0
+        self_count = 0
+        total_length = 0
+        
+        side_empty_count = 0
+        no_empty_self_count = 0
+        one_empty_self_count = 0
+        
+        # Scan up to 5 steps away
+        for i in range(1, 6):
+            nx, ny = x + i * dx, y + i * dy
+            
+            # Check bounds
+            if not (0 <= nx < size and 0 <= ny < size):
+                break
+                
+            current_role = board[nx][ny]
+            
+            # If we hit an opponent or out of bounds (handled by loop end), stop
+            if current_role == opponent:
+                break
+            
+            if current_role == role:
+                self_count += 1
+                side_empty_count = 0 # Reset side empty because we found a stone
+                
+                # If we had a gap previously, add it to inner gaps
+                if temp_empty_count > 0:
+                    inner_empty_count += temp_empty_count
+                    temp_empty_count = 0
+                
+                # Update continuous counts
+                if inner_empty_count == 0:
+                    no_empty_self_count += 1
+                    one_empty_self_count += 1
+                elif inner_empty_count == 1:
+                    one_empty_self_count += 1
+            
+            total_length += 1
+            
+            if current_role == 0:
+                temp_empty_count += 1
+                side_empty_count += 1
+                # If we hit 2 empty spaces in a row, usually shape ends there
+                if side_empty_count >= 2:
+                    break
+        
+        # Reset one_empty count if no inner gap was actually found
+        if inner_empty_count == 0:
+            one_empty_self_count = 0
+            
+        return {
+            'self_count': self_count,
+            'total_length': total_length,
+            'no_empty_self_count': no_empty_self_count,
+            'one_empty_self_count': one_empty_self_count,
+            'inner_empty_count': inner_empty_count,
+            'side_empty_count': side_empty_count
+        }

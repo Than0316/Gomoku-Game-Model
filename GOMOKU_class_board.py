@@ -1,174 +1,159 @@
-#from zobrist import Zobrist #hashing
-from cache import Cache
-from eval import Evaluate, FIVE
+import time
+from GOMOKU_class_shape import ShapeDetector, ShapeType
 
 class Board:
     def __init__(self, size=15, first_role=1):
         self.size = size
+        # 0: Empty, 1: Black, -1: White
         self.board = [[0 for _ in range(size)] for _ in range(size)]
-        self.first_role = first_role  # 1 for black, -1 for white
-        self.role = first_role
+        self.first_role = first_role
+        self.current_role = first_role
         self.history = []
+        
+        # Directions: Horizontal, Vertical, Diagonal(\), Diagonal(/)
+        self.directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
 
-        self.zobrist = Zobrist(self.size)
-        self.winner_cache = Cache()
-        self.gameover_cache = Cache()
-        self.evaluate_cache = Cache()
-        self.valuable_moves_cache = Cache()
-        self.evaluate_time = 0
-
-        self.evaluator = Evaluate(self.size)
+        # --- Placeholders for advanced modules ---
+        # self.zobrist = Zobrist(size) 
+        # self.evaluator = Evaluate(size) 
+        # self.caches = {} 
 
     def is_game_over(self):
-        hash_ = self.hash()
-        cached = self.gameover_cache.get(hash_)
-        if cached is not None:
-            return cached
-
-        if self.get_winner() != 0:
-            self.gameover_cache.put(hash_, True)
-            return True
-
-        # Check for empty spaces
+        """Checks if the game has ended (Win or Draw)."""
+        winner = self.get_winner()
+        if winner != 0:
+            return True, winner
+        
+        # Check for draw (full board)
         for row in self.board:
             if 0 in row:
-                self.gameover_cache.put(hash_, False)
-                return False
-
-        self.gameover_cache.put(hash_, True)
-        return True
+                return False, 0
+        return True, 0 # Draw
 
     def get_winner(self):
-        hash_ = self.hash()
-        cached = self.winner_cache.get(hash_)
-        if cached is not None:
-            return cached
-
-        directions = [(1, 0), (0, 1), (1, 1), (1, -1)]  # Horizontal, vertical, diagonals
+        """
+        Scans the board to see if anyone has 5 in a row.
+        Returns 1 (Black), -1 (White), or 0 (None).
+        """
+        # Optimization: In a real engine, only check the last move.
+        # Here we scan all non-empty points for robustness.
         for i in range(self.size):
             for j in range(self.size):
-                if self.board[i][j] == 0:
-                    continue
                 role = self.board[i][j]
-                for dx, dy in directions:
-                    count = 0
-                    x, y = i, j
-                    while 0 <= x < self.size and 0 <= y < self.size and self.board[x][y] == role:
+                if role == 0:
+                    continue
+                
+                for dx, dy in self.directions:
+                    count = 1
+                    # Forward check
+                    nx, ny = i + dx, j + dy
+                    while 0 <= nx < self.size and 0 <= ny < self.size and self.board[nx][ny] == role:
                         count += 1
-                        x += dx
-                        y += dy
+                        nx += dx
+                        ny += dy
+                    
                     if count >= 5:
-                        self.winner_cache.put(hash_, role)
                         return role
-
-        self.winner_cache.put(hash_, 0)
         return 0
 
-    def get_valid_moves(self):
-        return [[i, j] for i in range(self.size) for j in range(self.size) if self.board[i][j] == 0]
-
-    def put(self, i, j, role=None):
+    def put(self, row, col, role=None):
+        """Places a piece on the board."""
         if role is None:
-            role = self.role
-
-        if not (0 <= i < self.size and 0 <= j < self.size):
-            print("Invalid move: out of bounds!", i, j)
+            role = self.current_role
+            
+        if not (0 <= row < self.size and 0 <= col < self.size):
+            print(f"Invalid move: ({row}, {col}) out of bounds")
+            return False
+            
+        if self.board[row][col] != 0:
+            print(f"Invalid move: ({row}, {col}) is occupied")
             return False
 
-        if self.board[i][j] != 0:
-            print("Invalid move: position occupied!", i, j)
-            return False
-
-        self.board[i][j] = role
-        self.history.append({'i': i, 'j': j, 'role': role})
-        self.zobrist.toggle_piece(i, j, role)
-        self.evaluator.move(i, j, role)
-        self.role *= -1
+        self.board[row][col] = role
+        self.history.append({'row': row, 'col': col, 'role': role})
+        
+        # Update external modules here
+        # self.zobrist.toggle_piece(row, col, role)
+        # self.evaluator.move(row, col, role)
+        
+        self.current_role *= -1 # Switch turns
         return True
 
     def undo(self):
+        """Reverts the last move."""
         if not self.history:
-            print("No moves to undo!")
             return False
-
+            
         last_move = self.history.pop()
-        i, j, role = last_move['i'], last_move['j'], last_move['role']
-        self.board[i][j] = 0
-        self.role = role
-        self.zobrist.toggle_piece(i, j, role)
-        self.evaluator.undo(i, j)
+        row, col = last_move['row'], last_move['col']
+        self.board[row][col] = 0
+        self.current_role = last_move['role'] # Switch back
+        
+        # Revert external modules here
+        # self.zobrist.toggle_piece(row, col, last_move['role'])
+        # self.evaluator.undo(row, col)
         return True
 
-    def position2coordinate(self, position):
-        return [position // self.size, position % self.size]
-
-    def coordinate2position(self, coordinate):
-        return coordinate[0] * self.size + coordinate[1]
-
-    def get_valuable_moves(self, role, depth=0, only_three=False, only_four=False):
-        hash_ = self.hash()
-        prev = self.valuable_moves_cache.get(hash_)
-        if prev and prev['role'] == role and prev['depth'] == depth and prev['only_three'] == only_three and prev['only_four'] == only_four:
-            return prev['moves']
-
-        moves = self.evaluator.get_moves(role, depth, only_three, only_four)
-        if not only_three and not only_four:
-            center = self.size // 2
-            if self.board[center][center] == 0:
-                moves.append([center, center])
-
-        self.valuable_moves_cache.put(hash_, {
-            'role': role,
-            'moves': moves,
-            'depth': depth,
-            'only_three': only_three,
-            'only_four': only_four
-        })
-        return moves
-
-    def display(self, extra_points=None):
-        if extra_points is None:
-            extra_points = []
-
-        extra_positions = [self.coordinate2position(p) for p in extra_points]
-        result = ''
+    def get_valid_moves(self):
+        """Returns a list of all empty coordinates."""
+        moves = []
         for i in range(self.size):
             for j in range(self.size):
-                pos = self.coordinate2position([i, j])
-                if pos in extra_positions:
-                    result += '? '
+                if self.board[i][j] == 0:
+                    moves.append((i, j))
+        return moves
+
+    def get_valuable_moves(self, role, depth=0, only_three=False, only_four=False):
+        """
+        Generator for heuristic moves.
+        In Gomoku, you usually only want to check spots adjacent to existing stones
+        (neighbors within 1 or 2 steps).
+        """
+        # NOTE: In the full AI, this connects to the Evaluator class.
+        # Here is a basic implementation that returns neighbors.
+        
+        if not self.history:
+             # If board is empty, return center
+            center = self.size // 2
+            return [(center, center)]
+
+        valuable_moves = set()
+        neighbor_dist = 2 # Look 2 steps around existing stones
+        
+        for i in range(self.size):
+            for j in range(self.size):
+                if self.board[i][j] != 0:
+                    # Check surrounding empty spots
+                    for dx in range(-neighbor_dist, neighbor_dist + 1):
+                        for dy in range(-neighbor_dist, neighbor_dist + 1):
+                            if dx == 0 and dy == 0: continue
+                            
+                            ni, nj = i + dx, j + dy
+                            if 0 <= ni < self.size and 0 <= nj < self.size:
+                                if self.board[ni][nj] == 0:
+                                    valuable_moves.add((ni, nj))
+        
+        return list(valuable_moves)
+
+    def display(self):
+        """Prints the board to console."""
+        print("   " + " ".join([f"{i:X}" for i in range(self.size)])) # Header 0-F
+        for i in range(self.size):
+            row_str = f"{i:2d} "
+            for j in range(self.size):
+                if self.board[i][j] == 0:
+                    row_str += "- "
                 elif self.board[i][j] == 1:
-                    result += 'O '
+                    row_str += "● " # Black
                 elif self.board[i][j] == -1:
-                    result += 'X '
-                else:
-                    result += '- '
-            result += '\n'
-        return result
-
+                    row_str += "○ " # White
+            print(row_str)
+    
     def hash(self):
-        return self.zobrist.get_hash()
-
-    def evaluate(self, role):
-        hash_ = self.hash()
-        prev = self.evaluate_cache.get(hash_)
-        if prev and prev['role'] == role:
-            return prev['score']
-
-        winner = self.get_winner()
-        if winner != 0:
-            score = FIVE * winner * role
-        else:
-            score = self.evaluator.evaluate(role)
-
-        self.evaluate_cache.put(hash_, {'role': role, 'score': score})
-        return score
-
-    def reverse(self):
-        new_board = Board(self.size, -self.first_role)
-        for move in self.history:
-            new_board.put(move['i'], move['j'], -move['role'])
-        return new_board
-
-    def __str__(self):
-        return '\n'.join(''.join(str(cell) for cell in row) for row in self.board)
+        """
+        [PLACEHOLDER] Generates a hash key for transposition table lookup.
+        In a full engine, this would use Zobrist Hashing for speed.
+        For now, we use a simple string representation.
+        """
+        # (Assuming the grid uses 1, -1, 0)
+        return tuple(tuple(row) for row in self.board)
