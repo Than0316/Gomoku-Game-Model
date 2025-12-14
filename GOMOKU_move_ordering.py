@@ -1,4 +1,5 @@
 def gen(self, role, only_threes, star_spread):
+    """Order candidate moves"""
     if self.count <= 0:
         return [(7, 7)]
 

@@ -1,5 +1,6 @@
 from GOMOKU_config import Config
 from GOMOKU_class_shape import ShapeType
+from GOMOKU_class_board import Board ###___### get_valuable_moves (two positions next to existing stones)
 
 class MoveGenerator:
     def __init__(self, evaluator):
@@ -28,7 +29,7 @@ class MoveGenerator:
         # Check shapes for BOTH players (Self and Opponent)
         # We want to find our winning moves OR block their winning moves
         for r in [role, -role]:
-            for i in range(self.size):
+            for i in range(self.size): ###___### for candidate_moves in get_valuable_moves
                 for j in range(self.size):
                     if self.evaluator.board[i+1][j+1] != 0: continue
                     
