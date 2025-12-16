@@ -4,7 +4,9 @@ class ShapeType(IntEnum):
     """
     Enum representing the different shapes and their heuristic scores.
     These values match the logic in the JS 'shapes' constant.
+    ###___### We can create a method that detects all the shapes that each new stone creates to avoid scanning the board multiple times
     """
+    ###___### this part is in evaluation function, shape type only look for shape
     FIVE = 5
     BLOCK_FIVE = 50  # Win but blocked on one side (still a win)
     FOUR = 4         # Open four (guaranteed win next turn)

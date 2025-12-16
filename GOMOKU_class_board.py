@@ -11,7 +11,7 @@ class Board:
         self.history = []
         
         # Directions: Horizontal, Vertical, Diagonal(\), Diagonal(/)
-        self.directions = [(1, 0), (0, 1), (1, 1), (1, -1)]
+        self.directions = [(1, 0), (0, 1), (1, 1), (1, -1)] #(-1, 1), (-1, -1)
 
         # --- Placeholders for advanced modules ---
         # self.zobrist = Zobrist(size) 

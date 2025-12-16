@@ -3,11 +3,11 @@ from GOMOKU_class_shape import ShapeDetector, ShapeType
 
 # --- Score Constants ---
 FIVE = 10000000
-BLOCK_FIVE = FIVE
+BLOCK_FIVE = FIVE ###___### we don't care whether it's blocked or not
 FOUR = 100000
 FOUR_FOUR = FOUR            # Double Four
 FOUR_THREE = FOUR           # Four-Three
-THREE_THREE = FOUR // 2     # Double Three
+THREE_THREE = FOUR // 2     # Double Three ###___### if double open 3 same score than open 4
 BLOCK_FOUR = 1500
 THREE = 1000
 BLOCK_THREE = 150
