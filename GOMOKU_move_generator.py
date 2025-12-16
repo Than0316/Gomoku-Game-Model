@@ -3,6 +3,9 @@ from GOMOKU_class_shape import ShapeType
 from GOMOKU_class_board import Board ###___### get_valuable_moves (two positions next to existing stones)
 
 class MoveGenerator:
+    """
+    Answer to threats positions if threat, otherwise two positions next to existing stones.
+    """
     def __init__(self, evaluator):
         self.evaluator = evaluator
         self.size = evaluator.size

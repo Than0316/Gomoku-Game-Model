@@ -2,6 +2,9 @@ import time
 from GOMOKU_class_shape import ShapeDetector, ShapeType
 
 class Board:
+    """
+    Configuration of the board : board representation, each player's turn, checkwin (>1000000)
+    """
     def __init__(self, size=15, first_role=1):
         self.size = size
         # 0: Empty, 1: Black, -1: White

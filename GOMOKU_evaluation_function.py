@@ -1,6 +1,11 @@
 from GOMOKU_config import Config
 from GOMOKU_class_shape import ShapeDetector, ShapeType
 
+"""
+Score associated to every shape
+For every shape in [] (what shape detector returns), additional_score += shape_new_score
+"""
+
 # --- Score Constants ---
 FIVE = 10000000
 BLOCK_FIVE = FIVE ###___### we don't care whether it's blocked or not

@@ -6,6 +6,21 @@ from GOMOKU_evaluation_function import Evaluator, FIVE
 from GOMOKU_alpha_beta import minmax, MAX_SCORE
 from GOMOKU_config import Config
 
+"""
+Interaction with player.
+1. Ask player to decide whether he goes first.
+2. Ask the player to enter a position (or a board state)
+3. The computer adds a position to the board.
+
+Search Tree
+1. Call the move generator
+2. For each move, call shape detector (that returns all the shapes created by the new stone)
+3. For each new shape returned, give the additional score created by the new move, and add it to the total score (of player or computer)
+4. And so on for each search depth, do alpha-beta pruning
+5. Ignore all threat cases, fix a "general case" search depth of 6 for example and return the best move after that search depth is reached (or time out? if more than 10s)
+
+For each board state, store the board (for shape detector), the player's score, and the computer's score (so pruning based on scores and not shapes)
+"""
 
 # --- Helper Functions ---
 
