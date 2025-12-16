@@ -18,3 +18,5 @@ The move generator prioritise positions related to threats and that way we can i
 We can use Monte Carlo or other learning techniques to order general cases where threats are not possible.
 
 ###___### my comments
+
+We need to be more detailed on shape detector and evaluation function.
