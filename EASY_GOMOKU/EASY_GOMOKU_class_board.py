@@ -1,5 +1,4 @@
-# board.py
-
+#run "make html" to update the webpage for documentation
 class Board:
     SIZE = 6
     EMPTY = '-'
@@ -30,6 +29,11 @@ class Board:
     def play(self, move):
         """
         Place a stone on a valid position.
+
+        Parameters
+        ----------
+        move
+
         """
         r, c = move
         if self.grid[r][c] != self.EMPTY:
