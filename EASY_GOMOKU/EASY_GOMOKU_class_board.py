@@ -21,9 +21,41 @@ class Board:
 
     def legal_moves(self):
         """
-        Empty moves within the board.
+        Returns only empty cells that are adjacent to at least one placed stone.
+        This focuses the AI on relevant areas of the board.
         """
-        moves = [(r, c) for r in range(self.SIZE) for c in range(self.SIZE) if self.grid[r][c] == self.EMPTY]
+        moves = []
+        is_empty_board = True
+
+        for r in range(self.SIZE):
+            for c in range(self.SIZE):
+                if self.grid[r][c] == self.EMPTY:
+                    # Check 8 neighbors (including diagonals)
+                    has_neighbor = False
+                    for dr in [-1, 0, 1]:
+                        for dc in [-1, 0, 1]:
+                            if dr == 0 and dc == 0:
+                                continue
+                            nr, nc = r + dr, c + dc
+                            # Check bounds and if neighbor is not empty
+                            if 0 <= nr < self.SIZE and 0 <= nc < self.SIZE:
+                                if self.grid[nr][nc] != self.EMPTY:
+                                    has_neighbor = True
+                                    is_empty_board = False
+                                    break
+                        if has_neighbor:
+                            break
+                    
+                    if has_neighbor:
+                        moves.append((r, c))
+                else:
+                    is_empty_board = False
+
+        # If the board is totally empty, return the center move to start the game
+        if is_empty_board:
+            center = self.SIZE // 2 - 1
+            return [(center, center)]
+
         return moves
 
     def play(self, move):
