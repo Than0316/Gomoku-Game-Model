@@ -42,6 +42,7 @@ class Shape:
             'jump_3': ['XX-X', 'X-XX', 'OO-O', 'O-OO'],
             'blocked_3': ['BXXX', 'XXXB', 'OXXX', 'XXXO', 'BOOO', 'OOOB', 'XOOO', 'OOOX'],
             'open_2': ['-XX-', '-OO-'],
+            'blocked_2':['BXX', 'XXB', 'BOO', 'OOB', 'OXX', 'XXO', 'XOO', 'OOX'],
             'single': ['X', 'O'],
         }
 
@@ -63,5 +64,5 @@ class Shape:
                     for pattern_type, pattern_string in patterns.items():
                         for pattern in pattern_string:
                             if pattern in line:
-                                shapes.append((pattern_type, line, stone))
+                                shapes.append((pattern_type, stone))
         return shapes
