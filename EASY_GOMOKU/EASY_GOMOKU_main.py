@@ -1,4 +1,3 @@
-import sys
 from EASY_GOMOKU_class_board import Board
 from EASY_GOMOKU_minimax import find_best_move
 
@@ -79,7 +78,7 @@ def main():
         # 5. Apply move
         game_board = game_board.play(move)
 
-    print("\nGame End:")
+    print("\nFinal Board State:")
     game_board.print_board()
     print("========================================")
 

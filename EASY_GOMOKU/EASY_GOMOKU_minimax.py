@@ -1,5 +1,5 @@
 from EASY_GOMOKU_class_shape import Shape
-from eval_fct import evaluate
+from EASY_GOMOKU_evaluation_function import evaluate
 
 def minimax(board, depth, is_maximizing, ai_player):
     """
