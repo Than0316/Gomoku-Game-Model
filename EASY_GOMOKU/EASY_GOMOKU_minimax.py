@@ -1,4 +1,5 @@
-from EASY_GOMOKU_evaluation_function import evaluate
+from EASY_GOMOKU_class_shape import Shape
+from eval_fct import evaluate
 
 def minimax(board, depth, is_maximizing, ai_player):
     """
@@ -15,7 +16,7 @@ def minimax(board, depth, is_maximizing, ai_player):
     
     # 2. Base case: Max depth or draw
     if depth == 0 or board.is_full():
-        return evaluate(board, ai_player)
+        return evaluate(board, board.player)
 
     moves = board.legal_moves()
     

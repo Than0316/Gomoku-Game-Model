@@ -79,7 +79,7 @@ def main():
         # 5. Apply move
         game_board = game_board.play(move)
 
-    print("\nFinal Board State:")
+    print("\nGame End:")
     game_board.print_board()
     print("========================================")
 
