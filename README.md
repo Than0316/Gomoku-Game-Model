@@ -54,7 +54,13 @@ The prior Minimax implementation facilitates this transition by providing:
     Implements the heuristic evaluation function based on detected board patterns, used by the Minimax algorithm to score game states.
 
 - Other files and directories  
-  Dedicated to documentation, experiments, or auxiliary materials.
+  Dedicated to documentation (Sphinx), experiments, or auxiliary materials.
+
+---
+
+## Documentation
+
+The codebase is fully documented using Sphinx. The generated HTML documentation can be found in `build/html/index.html`.
 
 ---
 
@@ -66,7 +72,7 @@ The game can be played directly in the terminal.
 2. Navigate to the project root directory.
 3. Run the main file inside `EASY_GOMOKU`.
 
-The program launches an interactive Gomoku game in the terminal, where a human player competes against the AI.
+The program launches an interactive Gomoku game, where a human player competes against the AI.
 
 ---
 
