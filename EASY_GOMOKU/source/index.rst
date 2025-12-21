@@ -3,13 +3,14 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-EASY_gomoku_documentation documentation
+EASY GOMOKU Documentation
 =======================================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
-
+This documentation presents the design and implementation of a Gomoku AI
+developed on a reduced 6×6 board with a four-in-a-row winning condition.
+The project explores adversarial search methods, including Minimax and
+Monte Carlo Tree Search (MCTS), with a focus on clear game modeling and
+heuristic evaluation.
 
 .. toctree::
    :maxdepth: 2

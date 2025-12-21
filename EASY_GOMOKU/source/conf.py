@@ -6,7 +6,7 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'EASY_gomoku_documentation'
+project = 'EASY GOMOKU'
 copyright = '2025, Tianyi Han'
 author = 'Tianyi Han'
 release = '1.0'
