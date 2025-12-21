@@ -1,22 +1,84 @@
 # Gomoku-Game-Model
-Prunning VS MCTS
 
-git add .
-git commit -m "Describe your changes"
-git push
+This project implements an artificial intelligence framework for **Gomoku** on a reduced board size (**6×6**) with a modified winning condition of **four consecutive stones**.  
+The reduced setting enables faster experimentation while preserving the essential strategic properties of adversarial board games.
 
-We can improve efficiency by only counting the score at each state to avoid scanning the board multiple times. 
+---
 
-For example, win if the score of a player bigger then 1000000. 
+## Project Overview
 
-While doing alpha-beta, we prioritise cases where score > 100000 because it's a double threat that leads to an immediate win.
+The project is structured in **two main stages**.
 
-For each move, we compute only the additional score it created and we just add it to the total score. To do that, we can set the shape detector such that it takes the new move and check two positions next to that move the new shape it created. We call then the evaluation function to turn these shapes into scores.
+### Stage 1: Minimax-Based AI
 
-The move generator prioritise positions related to threats and that way we can increase the efficiency of our program.
+The first stage focuses on implementing a **Minimax-based Gomoku AI**.  
+This stage establishes a clear and explicit game model, including:
 
-We can use Monte Carlo or other learning techniques to order general cases where threats are not possible.
+- board representation,
+- move generation,
+- terminal-state detection,
+- heuristic evaluation function.
 
-###___### my comments
+Beyond producing a playable AI, this stage serves to validate the correctness of the game mechanics and to identify the core components required for adversarial search.
 
-We need to be more detailed on shape detector and evaluation function.
+### Stage 2: Monte Carlo Tree Search (MCTS)
+
+Building on the Minimax foundation, the second stage—**the main objective of the project**—is the implementation of a **Monte Carlo Tree Search (MCTS)** algorithm.
+
+The prior Minimax implementation facilitates this transition by providing:
+
+- a well-defined game state representation,
+- reusable game logic (legal moves, terminal checks),
+- heuristic knowledge that can be adapted for rollout policies or node evaluation within MCTS.
+
+---
+
+## Repository Structure
+
+- `EASY_GOMOKU/`  
+  Main source directory containing the Gomoku game model and AI implementations.
+
+  - `EASY_GOMOKU_main.py`  
+    Entry point of the program. Handles game initialization and launches the interactive Gomoku game in the terminal.
+
+  - `EASY_GOMOKU_minimax.py`  
+    Implements the Minimax algorithm for adversarial search, including move selection for the AI player.
+
+  - `EASY_GOMOKU_class_board.py`  
+    Defines the board representation, game state, and core game mechanics such as legal move generation and terminal-state detection.
+
+  - `EASY_GOMOKU_class_shape.py`  
+    Encodes pattern (shape) detection logic used to identify strategic configurations on the board.
+
+  - `EASY_GOMOKU_evaluation_function.py`  
+    Implements the heuristic evaluation function based on detected board patterns, used by the Minimax algorithm to score game states.
+
+- Other files and directories  
+  Dedicated to documentation, experiments, or auxiliary materials.
+
+---
+
+## How to Run
+
+The game can be played directly in the terminal.
+
+1. Ensure you have a compatible Python environment.
+2. Navigate to the project root directory.
+3. Run the main file inside `EASY_GOMOKU`.
+
+The program launches an interactive Gomoku game in the terminal, where a human player competes against the AI.
+
+---
+
+## Current Status
+
+- **Minimax-based AI**: implemented and functional.
+- **MCTS**: under development.
+- Board size and winning condition are intentionally simplified for clarity and computational efficiency.
+
+---
+
+## References
+
+- Russell, S., & Norvig, P. *Artificial Intelligence: A Modern Approach*. Pearson.
+- Browne, C. B., et al. *A Survey of Monte Carlo Tree Search Methods*. IEEE TCIAIG, 2012.
