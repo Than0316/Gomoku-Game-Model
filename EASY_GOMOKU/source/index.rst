@@ -15,4 +15,4 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
-   EASY_gomoku_documentation
+   EASY_gomoku

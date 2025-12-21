@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EASY_gomoku_documentation &mdash; EASY_gomoku_documentation 1.0 documentation</title>
+  <title>Board Module &mdash; EASY_gomoku_documentation 1.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
 
@@ -18,7 +18,8 @@
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="EASY_gomoku_documentation documentation" href="index.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,11 +41,47 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">EASY_gomoku_documentation</a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Board Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board"><code class="docutils literal notranslate"><span class="pre">Board</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board.EMPTY"><code class="docutils literal notranslate"><span class="pre">Board.EMPTY</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board.SIZE"><code class="docutils literal notranslate"><span class="pre">Board.SIZE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board.check_winner"><code class="docutils literal notranslate"><span class="pre">Board.check_winner()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board.copy"><code class="docutils literal notranslate"><span class="pre">Board.copy()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board.is_full"><code class="docutils literal notranslate"><span class="pre">Board.is_full()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board.legal_moves"><code class="docutils literal notranslate"><span class="pre">Board.legal_moves()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board.play"><code class="docutils literal notranslate"><span class="pre">Board.play()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_board.Board.print_board"><code class="docutils literal notranslate"><span class="pre">Board.print_board()</span></code></a></li>
 </ul>
-</div>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-EASY_GOMOKU_class_shape">Shape Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#EASY_GOMOKU_class_shape.Shape"><code class="docutils literal notranslate"><span class="pre">Shape</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_shape.Shape.DIRECTIONS"><code class="docutils literal notranslate"><span class="pre">Shape.DIRECTIONS</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_shape.Shape.detect_shapes"><code class="docutils literal notranslate"><span class="pre">Shape.detect_shapes()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#EASY_GOMOKU_class_shape.Shape.get_line"><code class="docutils literal notranslate"><span class="pre">Shape.get_line()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-EASY_GOMOKU_evaluation_function">Evaluation Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#EASY_GOMOKU_evaluation_function.evaluate"><code class="docutils literal notranslate"><span class="pre">evaluate()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-EASY_GOMOKU_minimax">Minimax AI</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#EASY_GOMOKU_minimax.find_best_move"><code class="docutils literal notranslate"><span class="pre">find_best_move()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#EASY_GOMOKU_minimax.minimax"><code class="docutils literal notranslate"><span class="pre">minimax()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#module-EASY_GOMOKU_main">Main Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#EASY_GOMOKU_main.get_human_move"><code class="docutils literal notranslate"><span class="pre">get_human_move()</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#EASY_GOMOKU_main.main"><code class="docutils literal notranslate"><span class="pre">main()</span></code></a></li>
+</ul>
+</li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -59,7 +96,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">EASY_gomoku_documentation</li>
+      <li class="breadcrumb-item active">Board Module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/EASY_gomoku.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -69,14 +106,335 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="easy-gomoku-documentation">
-<h1>EASY_gomoku_documentation<a class="headerlink" href="#easy-gomoku-documentation" title="Link to this heading"></a></h1>
+  <section id="module-EASY_GOMOKU_class_board">
+<span id="board-module"></span><h1>Board Module<a class="headerlink" href="#module-EASY_GOMOKU_class_board" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">EASY_GOMOKU_class_board.</span></span><span class="sig-name descname"><span class="pre">Board</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">grid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">player</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'X'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_board.Board" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents the Gomoku board and game state.</p>
+<p>This class encapsulates the board configuration, the current player,
+and the core game mechanics required for adversarial search algorithms
+such as Minimax and Monte Carlo Tree Search.</p>
+<p>The game is played on a fixed 6×6 board with a four-in-a-row winning
+condition.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board.EMPTY">
+<span class="sig-name descname"><span class="pre">EMPTY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'-'</span></em><a class="headerlink" href="#EASY_GOMOKU_class_board.Board.EMPTY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board.SIZE">
+<span class="sig-name descname"><span class="pre">SIZE</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">6</span></em><a class="headerlink" href="#EASY_GOMOKU_class_board.Board.SIZE" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board.check_winner">
+<span class="sig-name descname"><span class="pre">check_winner</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">stone</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_board.Board.check_winner" title="Link to this definition"></a></dt>
+<dd><p>Determine whether a given player has won the game.</p>
+<p>A win is defined as four consecutive stones aligned
+horizontally, vertically, or diagonally.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stone</strong> (<em>{'X'</em><em>, </em><em>'O'}</em>) – The player symbol to check for a winning condition.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if the specified player has achieved four in a row,
+False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_board.Board.copy" title="Link to this definition"></a></dt>
+<dd><p>Create an independent copy of the board.</p>
+<p>This method is used to simulate moves without modifying the
+original board state, which is essential for tree-based
+search algorithms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A deep copy of the current board, including the grid and
+the current player.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#EASY_GOMOKU_class_board.Board" title="EASY_GOMOKU_class_board.Board">Board</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board.is_full">
+<span class="sig-name descname"><span class="pre">is_full</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_board.Board.is_full" title="Link to this definition"></a></dt>
+<dd><p>Check whether the board is completely filled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if there are no empty cells remaining, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board.legal_moves">
+<span class="sig-name descname"><span class="pre">legal_moves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_board.Board.legal_moves" title="Link to this definition"></a></dt>
+<dd><p>Generate legal moves for the current board state.</p>
+<p>Legal moves are restricted to empty cells that are adjacent
+(including diagonals) to at least one already placed stone.
+This heuristic significantly reduces the branching factor
+while preserving strategically relevant moves.</p>
+<p>If the board is empty, the center position is returned as the
+only legal opening move.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of (row, column) coordinates representing legal moves.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[tuple[int, int]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board.play">
+<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">move</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_board.Board.play" title="Link to this definition"></a></dt>
+<dd><p>Apply a move and return the resulting board state.</p>
+<p>The move is applied immutably: a new board is returned,
+leaving the current board unchanged.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>move</strong> (<em>tuple</em><em>[</em><em>int</em><em>, </em><em>int</em><em>]</em>) – The (row, column) position where the current player
+places a stone.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A new board state after the move is applied.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#EASY_GOMOKU_class_board.Board" title="EASY_GOMOKU_class_board.Board">Board</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If the specified cell is already occupied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_board.Board.print_board">
+<span class="sig-name descname"><span class="pre">print_board</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_board.Board.print_board" title="Link to this definition"></a></dt>
+<dd><p>Print the board state to the terminal.</p>
+<p>This method is intended for human interaction during
+gameplay and debugging.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-EASY_GOMOKU_class_shape">
+<span id="shape-module"></span><h1>Shape Module<a class="headerlink" href="#module-EASY_GOMOKU_class_shape" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_shape.Shape">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">EASY_GOMOKU_class_shape.</span></span><span class="sig-name descname"><span class="pre">Shape</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_shape.Shape" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Detect and classify local stone patterns on a Gomoku board.</p>
+<p>This class is responsible for identifying strategically relevant
+configurations (e.g., open three, jump three, blocked patterns)
+for both players. Detected patterns are later used by the heuristic
+evaluation function to score board states.</p>
+<p>Boundaries of the board and opponent stones are treated as blocking
+elements when identifying patterns.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_shape.Shape.DIRECTIONS">
+<span class="sig-name descname"><span class="pre">DIRECTIONS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">[(1,</span> <span class="pre">0),</span> <span class="pre">(0,</span> <span class="pre">1),</span> <span class="pre">(1,</span> <span class="pre">1),</span> <span class="pre">(1,</span> <span class="pre">-1)]</span></em><a class="headerlink" href="#EASY_GOMOKU_class_shape.Shape.DIRECTIONS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_shape.Shape.detect_shapes">
+<span class="sig-name descname"><span class="pre">detect_shapes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_shape.Shape.detect_shapes" title="Link to this definition"></a></dt>
+<dd><p>Detect all predefined patterns present on the board.</p>
+<p>The method scans the board in all principal directions and
+identifies occurrences of predefined local patterns such as
+open threes, jump threes, blocked patterns, and four-in-a-row.
+Each detected pattern is associated with the player stone
+that generated it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A list of detected shapes. Each element is a tuple
+<code class="docutils literal notranslate"><span class="pre">(pattern_type,</span> <span class="pre">stone)</span></code>, where <code class="docutils literal notranslate"><span class="pre">pattern_type</span></code> is the
+name of the detected configuration and <code class="docutils literal notranslate"><span class="pre">stone</span></code> is the
+corresponding player symbol (‘X’ or ‘O’).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>list[tuple[str, str]]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="EASY_GOMOKU_class_shape.Shape.get_line">
+<span class="sig-name descname"><span class="pre">get_line</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction_row</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction_column</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_class_shape.Shape.get_line" title="Link to this definition"></a></dt>
+<dd><p>Extract a line segment from the board in a given direction.</p>
+<p>The method returns a string representation of stones starting
+from a given position and extending in a specified direction.
+Board boundaries are encoded using the symbol ‘B’, which is
+treated as a blocking element.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>row</strong> (<em>int</em>) – Starting row index.</p></li>
+<li><p><strong>column</strong> (<em>int</em>) – Starting column index.</p></li>
+<li><p><strong>direction_row</strong> (<em>int</em>) – Row increment defining the direction.</p></li>
+<li><p><strong>direction_column</strong> (<em>int</em>) – Column increment defining the direction.</p></li>
+<li><p><strong>length</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of consecutive positions to extract.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A string encoding the extracted line segment, consisting of
+player stones, empty cells, or boundary markers (‘B’).</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-EASY_GOMOKU_evaluation_function">
+<span id="evaluation-function"></span><h1>Evaluation Function<a class="headerlink" href="#module-EASY_GOMOKU_evaluation_function" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="EASY_GOMOKU_evaluation_function.evaluate">
+<span class="sig-prename descclassname"><span class="pre">EASY_GOMOKU_evaluation_function.</span></span><span class="sig-name descname"><span class="pre">evaluate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root_player</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_evaluation_function.evaluate" title="Link to this definition"></a></dt>
+<dd><p>Heuristic evaluation of a board state.</p>
+<p>This function assigns a scalar score to a Gomoku board state from
+the perspective of a designated root player. The evaluation is
+based on the detection of local stone patterns and a weighted
+scoring scheme reflecting their strategic importance.</p>
+<p>The score is positive if the position is favorable to the root
+player and negative if it favors the opponent.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>board</strong> (<a class="reference internal" href="#EASY_GOMOKU_class_board.Board" title="EASY_GOMOKU_class_board.Board"><em>Board</em></a>) – The current board state to be evaluated.</p></li>
+<li><p><strong>root_player</strong> (<em>{'X'</em><em>, </em><em>'O'}</em>) – The player for whom the evaluation is performed (typically the
+maximizing player in Minimax).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A heuristic score representing the desirability of the board
+state for the root player.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-EASY_GOMOKU_minimax">
+<span id="minimax-ai"></span><h1>Minimax AI<a class="headerlink" href="#module-EASY_GOMOKU_minimax" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="EASY_GOMOKU_minimax.find_best_move">
+<span class="sig-prename descclassname"><span class="pre">EASY_GOMOKU_minimax.</span></span><span class="sig-name descname"><span class="pre">find_best_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_minimax.find_best_move" title="Link to this definition"></a></dt>
+<dd><p>Select the best move for the current player using Minimax search.</p>
+<p>This function serves as the entry point for the AI. It evaluates all
+legal moves from the current board state and returns the move with
+the highest Minimax value.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>board</strong> (<a class="reference internal" href="#EASY_GOMOKU_class_board.Board" title="EASY_GOMOKU_class_board.Board"><em>Board</em></a>) – The current board state.</p></li>
+<li><p><strong>depth</strong> (<em>int</em><em>, </em><em>optional</em>) – Maximum search depth for Minimax.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The selected move as a (row, column) pair, or None if no legal
+moves are available.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[int, int] or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="EASY_GOMOKU_minimax.minimax">
+<span class="sig-prename descclassname"><span class="pre">EASY_GOMOKU_minimax.</span></span><span class="sig-name descname"><span class="pre">minimax</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">depth</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_maximizing</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ai_player</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_minimax.minimax" title="Link to this definition"></a></dt>
+<dd><p>Perform a depth-limited Minimax search.</p>
+<p>This function recursively explores the game tree to estimate the
+utility of a board state, assuming optimal play from both players.
+It alternates between maximizing and minimizing layers depending
+on whose turn it is.</p>
+<p>The algorithm is implemented without alpha–beta pruning and relies
+on a heuristic evaluation function at leaf nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>board</strong> (<a class="reference internal" href="#EASY_GOMOKU_class_board.Board" title="EASY_GOMOKU_class_board.Board"><em>Board</em></a>) – The current board state.</p></li>
+<li><p><strong>depth</strong> (<em>int</em>) – Remaining search depth. The search terminates when depth reaches
+zero.</p></li>
+<li><p><strong>is_maximizing</strong> (<em>bool</em>) – Indicates whether the current node corresponds to the maximizing
+player (the AI) or the minimizing player (the opponent).</p></li>
+<li><p><strong>ai_player</strong> (<em>{'X'</em><em>, </em><em>'O'}</em>) – The player symbol controlled by the AI. This defines the
+evaluation perspective throughout the search.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Minimax value (heuristic score) of the board state.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-EASY_GOMOKU_main">
+<span id="main-interface"></span><h1>Main Interface<a class="headerlink" href="#module-EASY_GOMOKU_main" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="EASY_GOMOKU_main.get_human_move">
+<span class="sig-prename descclassname"><span class="pre">EASY_GOMOKU_main.</span></span><span class="sig-name descname"><span class="pre">get_human_move</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">board</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_main.get_human_move" title="Link to this definition"></a></dt>
+<dd><p>Prompt the human player for a valid move.</p>
+<p>This function repeatedly requests input from the human player until
+a valid move is provided. Input is expected in the format
+<code class="docutils literal notranslate"><span class="pre">row</span> <span class="pre">col</span></code> using 1-based indexing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>board</strong> (<a class="reference internal" href="#EASY_GOMOKU_class_board.Board" title="EASY_GOMOKU_class_board.Board"><em>Board</em></a>) – The current board state.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A valid move represented as a (row, column) pair using
+0-based indexing.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>tuple[int, int]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="EASY_GOMOKU_main.main">
+<span class="sig-prename descclassname"><span class="pre">EASY_GOMOKU_main.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#EASY_GOMOKU_main.main" title="Link to this definition"></a></dt>
+<dd><p>Run an interactive Gomoku game in the terminal.</p>
+<p>This function initializes the game, manages turn-taking between the
+human player and the AI, and handles game termination conditions
+(win or draw). The AI selects moves using a depth-limited Minimax
+search.</p>
+</dd></dl>
+
 </section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="EASY_gomoku_documentation documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 
