@@ -12,12 +12,7 @@ Modified so the AI uses the heuristic MCTS (mcts_pure) only.
 from __future__ import print_function
 import pickle
 from mcts_game import Board, Game
-from mcts_guided import MCTSPlayer as MCTS_Pure
-# Note: we intentionally do not import the neural-network-based MCTS player here
-# from mcts_alphaZero import MCTSPlayer
-# and we don't need PolicyValueNetNumpy when using the heuristic pure MCTS
-# from policy_value_net_numpy import PolicyValueNetNumpy
-
+from mcts_guided import MCTSPlayer as MCTS_guided
 
 class Human(object):
     """
@@ -54,17 +49,9 @@ def run():
     try:
         board = Board(width=width, height=height, n_in_row=n)
         game = Game(board)
-
-        # ############### human VS AI ###################
-        # Use the heuristic pure MCTS player (the version in mcts_pure.py
-        # which includes your pattern-based rollout heuristic).
-        mcts_player = MCTS_Pure(c_puct=5, n_playout=400)  # set larger n_playout for better play
-
-        # human player, input your move in the format: 2,3
-        human = Human()
-
-        # set start_player=0 for human first, start_player=1 for AI first
-        game.start_play(human, mcts_player, start_player=1, is_shown=1)
+        mcts_player = MCTS_guided(c_puct=5, n_playout=400)  # set larger n_playout for better play
+        human = Human() # human player, input your move in the format: 2,3
+        game.start_play(human, mcts_player, start_player=1, is_shown=1) # set start_player=0 for human first, start_player=1 for AI first
     except KeyboardInterrupt:
         print('\n\rquit')
 
