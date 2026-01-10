@@ -5,9 +5,11 @@ Compare Minimax vs MCTS strength from all openings with timing and progress bar.
 
 from pathlib import Path
 import sys
+import pickle
 from tqdm import tqdm
 import time
 import numpy as np
+from Monte_Carlo_guided_GOMOKU.policy_value_net_numpy import PolicyValueNetNumpy
 
 # Make repo root and module folders importable regardless of invocation CWD
 repo_root = Path(__file__).resolve().parent
@@ -99,10 +101,32 @@ def apply_opening_moves(easy_board, mcts_board, first_idx, second_idx):
 # ------------------ Timed Game Play ------------------
 def play_deterministic_game_from_timed(open_easy_board, open_mcts_board, minimax_player,
                                        minimax_depth, mcts_playouts, minimax_times, mcts_times):
-    mcts_player = MCTSPlayer(c_puct=5, n_playout=mcts_playouts)
     easy_board = open_easy_board
     mcts_board = open_mcts_board
     size = EasyBoard.SIZE
+        
+    # --- AlphaZero policy-value network ---
+    model_file = repo_root / "Monte_Carlo_guided_GOMOKU" / "best_policy_6_6_4.model"
+    try:
+        policy_param = pickle.load(open(model_file, 'rb'))
+    except:
+        policy_param = pickle.load(open(model_file, 'rb'),
+                                       encoding='bytes')  # To support python3
+        
+    best_policy = PolicyValueNetNumpy(
+        board_width=size,
+        board_height=size,
+        net_params=policy_param
+    )
+
+    policy_fn = best_policy.policy_value_fn
+
+    # --- AlphaZero MCTS player ---
+    mcts_player = MCTSPlayer(
+        policy_fn,
+        c_puct=5,
+        n_playout=mcts_playouts
+    )
 
     def normalize_move(move, size):
         if move is None:
@@ -138,7 +162,7 @@ def play_deterministic_game_from_timed(open_easy_board, open_mcts_board, minimax
         else:
             start = time.perf_counter()
             try:
-                move_candidate = mcts_player.get_action(mcts_board, temp=0)
+                move_candidate = mcts_player.get_action(mcts_board, temp=1e-3)
             except TypeError:
                 move_candidate = mcts_player.get_action(mcts_board)
             elapsed = time.perf_counter() - start
@@ -234,5 +258,17 @@ if __name__ == "__main__":
     run_all_openings_and_compare()
 
 """
+=== TOTAL RUNTIME: 113.55 s ===
+Average Minimax decision time: 293.84 ms
+Average MCTS decision time:    407.73 ms
 
+Case A: Minimax starts first (Minimax = player 1)
+  Minimax wins: 2 / 24 (8.33%)
+  MCTS wins:    22 / 24 (91.67%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: MCTS starts first (MCTS = player 1)
+  MCTS wins:    24 / 24 (100.00%)
+  Minimax wins: 0 / 24 (0.00%)
+  Draws:        0 / 24 (0.00%)
 """
