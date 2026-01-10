@@ -234,17 +234,17 @@ if __name__ == "__main__":
     run_all_openings_and_compare()
 
 """
-=== TOTAL RUNTIME: 153.98 s ===
-Average Minimax decision time: 291.96 ms
-Average MCTS decision time:    185.58 ms
+=== TOTAL RUNTIME: 160.43 s ===
+Average Minimax decision time: 302.64 ms
+Average MCTS decision time:    181.04 ms
 
 Case A: Minimax starts first (Minimax = player 1)
-  Minimax wins: 4 / 24 (16.67%)
-  MCTS wins:    20 / 24 (83.33%)
+  Minimax wins: 1 / 24 (4.17%)
+  MCTS wins:    23 / 24 (95.83%)
   Draws:        0 / 24 (0.00%)
 
 Case B: MCTS starts first (MCTS = player 1)
-  MCTS wins:    23 / 24 (95.83%)
-  Minimax wins: 1 / 24 (4.17%)
+  MCTS wins:    24 / 24 (100.00%)
+  Minimax wins: 0 / 24 (0.00%)
   Draws:        0 / 24 (0.00%)
 """

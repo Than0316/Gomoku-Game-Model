@@ -43,8 +43,8 @@ class Human(object):
 
 
 def run():
-    n = 5
-    width, height = 8, 8
+    n = 4
+    width, height = 6, 6
 
     try:
         board = Board(width=width, height=height, n_in_row=n)

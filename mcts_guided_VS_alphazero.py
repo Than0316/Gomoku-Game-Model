@@ -187,9 +187,9 @@ if __name__ == "__main__":
     run_all_openings_vs_alpha_and_guided()
 
 """
-=== TOTAL RUNTIME: 137.05 s ===
-Average AlphaZero game time: 440.37 ms
-Average Guided MCTS game time: 282.89 ms
+=== TOTAL RUNTIME: 126.14 s ===
+Average AlphaZero game time: 414.04 ms
+Average Guided MCTS game time: 276.64 ms
 
 Case A: AlphaZero starts first (AlphaZero = player 1)
   AlphaZero wins: 24 / 24 (100.00%)
@@ -197,7 +197,7 @@ Case A: AlphaZero starts first (AlphaZero = player 1)
   Draws:          0 / 24 (0.00%)
 
 Case B: Guided MCTS starts first (Guided = player 1)
-  Guided wins:    15 / 24 (62.50%)
-  AlphaZero wins: 9 / 24 (37.50%)
+  Guided wins:    21 / 24 (87.50%)
+  AlphaZero wins: 3 / 24 (12.50%)
   Draws:          0 / 24 (0.00%)
 """

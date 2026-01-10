@@ -257,19 +257,62 @@ class MCTS(object):
         # Update value and visit count of nodes in this traversal.
         node.update_recursive(-leaf_value)
 
-    def _evaluate_rollout(self, state, limit=1000):
+    def _evaluate_rollout(self, state, limit=1000, temperature=0.7):
         """Use the rollout policy to play until the end of the game,
         returning +1 if the current player wins, -1 if the opponent wins,
         and 0 if it is a tie.
+
+        Sampling from rollout_policy_fn is now stochastic: we sample a move
+        according to the probability distribution returned by rollout_policy_fn
+        using np.random.choice. The temperature parameter (default 0.7) is
+        passed down to the rollout_policy_fn to control randomness.
         """
         player = state.get_current_player()
         for i in range(limit):
             end, winner = state.game_end()
             if end:
                 break
-            action_probs = rollout_policy_fn(state)
-            max_action = max(action_probs, key=itemgetter(1))[0]
-            state.do_move(max_action)
+            # Obtain (move, prob) pairs from rollout policy
+            try:
+                action_probs_iter = rollout_policy_fn(state, temperature)
+                action_probs = list(action_probs_iter)
+                # Handle empty candidate list
+                if not action_probs:
+                    # fallback to uniform random from availables
+                    avail = list(state.availables)
+                    if not avail:
+                        break
+                    action = np.random.choice(avail)
+                    state.do_move(action)
+                    continue
+
+                moves, probs = zip(*action_probs)
+                probs = np.array(probs, dtype=float)
+
+                # Validate probabilities: finite and positive sum
+                if not np.isfinite(probs).all() or probs.sum() <= 0:
+                    # fallback to uniform over moves
+                    probs = np.ones(len(moves), dtype=float)
+
+                # Normalize probabilities to sum to 1
+                probs = probs / probs.sum()
+
+                # If there's only one move, pick it deterministically
+                if len(moves) == 1:
+                    action = moves[0]
+                else:
+                    # Sample an index according to probs
+                    idx = np.random.choice(len(moves), p=probs)
+                    action = moves[int(idx)]
+
+            except Exception:
+                # Any unexpected error: fallback to uniform random move
+                avail = list(state.availables)
+                if not avail:
+                    break
+                action = np.random.choice(avail)
+
+            state.do_move(action)
         else:
             # If no break from the loop, issue a warning.
             print("WARNING: rollout reached move limit")

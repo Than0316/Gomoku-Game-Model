@@ -173,17 +173,17 @@ if __name__ == "__main__":
     run_all_openings_vs_mcts()
 
 """
-=== TOTAL RUNTIME: 124.04 s ===
-Average Pure MCTS move time:   226.41 ms
-Average Guided MCTS move time: 225.34 ms
+=== TOTAL RUNTIME: 140.63 s ===
+Average Pure MCTS move time:   228.57 ms
+Average Guided MCTS move time: 234.45 ms
 
 Case A: Pure MCTS starts first (Pure = player 1)
-  Pure wins:    8 / 24 (33.33%)
-  Guided wins:  16 / 24 (66.67%)
+  Pure wins:    3 / 24 (12.50%)
+  Guided wins:  21 / 24 (87.50%)
   Draws:        0 / 24 (0.00%)
 
 Case B: Guided MCTS starts first (Guided = player 1)
-  Guided wins:  13 / 24 (54.17%)
-  Pure wins:    11 / 24 (45.83%)
+  Guided wins:  16 / 24 (66.67%)
+  Pure wins:    8 / 24 (33.33%)
   Draws:        0 / 24 (0.00%)
 """
