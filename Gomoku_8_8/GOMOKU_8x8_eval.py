@@ -1,5 +1,5 @@
-from GOMOKU_8x8_config import Config
-from GOMOKU_8x8_shape import ShapeDetector
+from Gomoku_8_8.GOMOKU_8x8_config import Config
+from Gomoku_8_8.GOMOKU_8x8_shape import ShapeDetector
 
 def evaluate(board, current_player):
     """

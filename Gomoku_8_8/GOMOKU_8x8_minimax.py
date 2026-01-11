@@ -1,5 +1,5 @@
-from GOMOKU_8x8_config import Config
-from GOMOKU_8x8_eval import evaluate
+from Gomoku_8_8.GOMOKU_8x8_config import Config
+from Gomoku_8_8.GOMOKU_8x8_eval import evaluate
 
 def minimax(board, depth, alpha, beta, is_maximizing, ai_player):
     """

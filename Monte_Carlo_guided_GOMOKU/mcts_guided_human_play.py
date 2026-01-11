@@ -12,7 +12,7 @@ Modified so the AI uses the heuristic MCTS (mcts_pure) only.
 from __future__ import print_function
 import pickle
 from mcts_game import Board, Game
-from mcts_guided import MCTSPlayer as MCTS_guided
+from mcts_heuristic import MCTSPlayer as MCTS_guided
 
 class Human(object):
     """

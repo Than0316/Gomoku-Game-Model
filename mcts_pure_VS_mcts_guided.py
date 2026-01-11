@@ -28,7 +28,7 @@ except Exception:
 try:
     from Monte_Carlo_guided_GOMOKU.mcts_guided import MCTSPlayer as MCTSPlayerGuided
 except Exception:
-    from mcts_guided import MCTSPlayer as MCTSPlayerGuided
+    from mcts_heuristic import MCTSPlayer as MCTSPlayerGuided
 
 # ------------------ Configuration ------------------
 N_PLAYOUTS = 400

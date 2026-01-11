@@ -24,7 +24,7 @@ except Exception:
 try:
     from Monte_Carlo_guided_GOMOKU.mcts_guided import MCTSPlayer as GuidedMCTS
 except Exception:
-    from mcts_guided import MCTSPlayer as GuidedMCTS
+    from mcts_heuristic import MCTSPlayer as GuidedMCTS
 
 try:
     from Monte_Carlo_guided_GOMOKU.mcts_alphaZero import MCTSPlayer as AlphaZeroMCTS

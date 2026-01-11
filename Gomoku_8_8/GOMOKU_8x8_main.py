@@ -1,7 +1,7 @@
 import time
-from GOMOKU_8x8_config import Config
-from GOMOKU_8x8_board import Board
-from GOMOKU_8x8_minimax import find_best_move
+from Gomoku_8_8.GOMOKU_8x8_config import Config
+from Gomoku_8_8.GOMOKU_8x8_board import Board
+from Gomoku_8_8.GOMOKU_8x8_minimax import find_best_move
 
 def get_human_move(board):
     while True:

@@ -1,4 +1,4 @@
-from GOMOKU_8x8_config import Config
+from Gomoku_8_8.GOMOKU_8x8_config import Config
 
 class Board:
     def __init__(self, grid=None, player='X'):

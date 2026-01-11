@@ -34,7 +34,7 @@ except Exception:
 try:
     from Monte_Carlo_guided_GOMOKU.mcts_guided import MCTSPlayer
 except Exception:
-    from mcts_guided import MCTSPlayer
+    from mcts_heuristic import MCTSPlayer
 
 # Configuration
 MINIMAX_DEPTH = 3
