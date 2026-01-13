@@ -233,7 +233,7 @@ if __name__ == "__main__":
     print("Running deterministic strength comparison over all valid second moves around center...")
     run_all_openings_and_compare()
 
-"""
+"""minimax depth 3
 === TOTAL RUNTIME: 160.43 s ===
 Average Minimax decision time: 302.64 ms
 Average MCTS decision time:    181.04 ms
@@ -248,3 +248,35 @@ Case B: MCTS starts first (MCTS = player 1)
   Minimax wins: 0 / 24 (0.00%)
   Draws:        0 / 24 (0.00%)
 """
+
+"""minimax depth 4
+=== TOTAL RUNTIME: 162.44 s ===
+Average Minimax decision time: 293.54 ms
+Average MCTS decision time:    183.95 ms
+
+Case A: Minimax starts first (Minimax = player 1)
+  Minimax wins: 1 / 24 (4.17%)
+  MCTS wins:    23 / 24 (95.83%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: MCTS starts first (MCTS = player 1)
+  MCTS wins:    22 / 24 (91.67%)
+  Minimax wins: 2 / 24 (8.33%)
+  Draws:        0 / 24 (0.00%)
+  """
+
+"""minimax search depth 5
+=== TOTAL RUNTIME: 1094.07 s ===
+Average Minimax decision time: 5508.22 ms
+Average MCTS decision time:    220.85 ms
+
+Case A: Minimax starts first (Minimax = player 1)
+  Minimax wins: 23 / 24 (95.83%)
+  MCTS wins:    1 / 24 (4.17%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: MCTS starts first (MCTS = player 1)
+  MCTS wins:    22 / 24 (91.67%)
+  Minimax wins: 1 / 24 (4.17%)
+  Draws:        1 / 24 (4.17%)
+  """
