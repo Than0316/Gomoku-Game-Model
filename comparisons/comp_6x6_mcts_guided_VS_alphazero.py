@@ -11,7 +11,7 @@ import numpy as np
 import pickle
 
 # Make repo root and module folders importable
-repo_root = Path(__file__).resolve().parent
+repo_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(repo_root))
 sys.path.insert(0, str(repo_root / "Monte_Carlo_guided_GOMOKU"))
 
@@ -199,5 +199,21 @@ Case A: AlphaZero starts first (AlphaZero = player 1)
 Case B: Guided MCTS starts first (Guided = player 1)
   Guided wins:    21 / 24 (87.50%)
   AlphaZero wins: 3 / 24 (12.50%)
+  Draws:          0 / 24 (0.00%)
+"""
+
+"""temp = 10
+=== TOTAL RUNTIME: 179.73 s ===
+Average AlphaZero game time: 425.56 ms
+Average Guided MCTS game time: 458.68 ms
+
+Case A: AlphaZero starts first (AlphaZero = player 1)
+  AlphaZero wins: 23 / 24 (95.83%)
+  Guided wins:    0 / 24 (0.00%)
+  Draws:          1 / 24 (4.17%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:    16 / 24 (66.67%)
+  AlphaZero wins: 8 / 24 (33.33%)
   Draws:          0 / 24 (0.00%)
 """

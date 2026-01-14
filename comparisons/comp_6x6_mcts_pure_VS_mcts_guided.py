@@ -10,7 +10,7 @@ import time
 import numpy as np
 
 # Make repo root and module folders importable
-repo_root = Path(__file__).resolve().parent
+repo_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(repo_root))
 sys.path.insert(0, str(repo_root / "Monte_Carlo_guided_GOMOKU"))
 

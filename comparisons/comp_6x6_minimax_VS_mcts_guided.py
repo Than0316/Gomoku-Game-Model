@@ -10,7 +10,7 @@ import time
 import numpy as np
 
 # Make repo root and module folders importable regardless of invocation CWD
-repo_root = Path(__file__).resolve().parent
+repo_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(repo_root))
 sys.path.insert(0, str(repo_root / "EASY_GOMOKU"))
 sys.path.insert(0, str(repo_root / "Monte_Carlo_guided_GOMOKU"))
@@ -280,3 +280,51 @@ Case B: MCTS starts first (MCTS = player 1)
   Minimax wins: 1 / 24 (4.17%)
   Draws:        1 / 24 (4.17%)
   """
+
+""" temp = 0.1
+=== TOTAL RUNTIME: 174.16 s ===
+Average Minimax decision time: 311.18 ms
+Average MCTS decision time:    201.67 ms
+
+Case A: Minimax starts first (Minimax = player 1)
+  Minimax wins: 2 / 24 (8.33%)
+  MCTS wins:    22 / 24 (91.67%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: MCTS starts first (MCTS = player 1)
+  MCTS wins:    21 / 24 (87.50%)
+  Minimax wins: 3 / 24 (12.50%)
+  Draws:        0 / 24 (0.00%)
+  """
+
+"""temp = 1
+=== TOTAL RUNTIME: 152.43 s ===
+Average Minimax decision time: 290.06 ms
+Average MCTS decision time:    189.61 ms
+
+Case A: Minimax starts first (Minimax = player 1)
+  Minimax wins: 1 / 24 (4.17%)
+  MCTS wins:    23 / 24 (95.83%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: MCTS starts first (MCTS = player 1)
+  MCTS wins:    23 / 24 (95.83%)
+  Minimax wins: 1 / 24 (4.17%)
+  Draws:        0 / 24 (0.00%)
+"""
+
+"""temp = 10
+=== TOTAL RUNTIME: 158.34 s ===
+Average Minimax decision time: 253.05 ms
+Average MCTS decision time:    266.37 ms
+
+Case A: Minimax starts first (Minimax = player 1)
+  Minimax wins: 2 / 24 (8.33%)
+  MCTS wins:    22 / 24 (91.67%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: MCTS starts first (MCTS = player 1)
+  MCTS wins:    23 / 24 (95.83%)
+  Minimax wins: 1 / 24 (4.17%)
+  Draws:        0 / 24 (0.00%)
+"""
