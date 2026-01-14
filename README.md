@@ -40,6 +40,7 @@ Gomoku on an 8×8 board with advanced agents:
 ### 4. `Monte_Carlo_guided_GOMOKU`  
 Contains MCTS variants for 6×6 Gomoku:
 
+- `mcts_game.py` – general game setting.  
 - `mcts_pure.py` – Standard MCTS with random rollouts.  
 - `mcts_guided.py` – MCTS guided by heuristic evaluation.  
 - `mcts_alphaZero.py` – MCTS guided by a policy-value network.  
