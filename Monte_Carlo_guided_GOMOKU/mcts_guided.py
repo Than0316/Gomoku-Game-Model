@@ -257,7 +257,7 @@ class MCTS(object):
         # Update value and visit count of nodes in this traversal.
         node.update_recursive(-leaf_value)
 
-    def _evaluate_rollout(self, state, limit=1000, temperature=10):
+    def _evaluate_rollout(self, state, limit=1000, temperature=0.7):
         """Use the rollout policy to play until the end of the game,
         returning +1 if the current player wins, -1 if the opponent wins,
         and 0 if it is a tie.

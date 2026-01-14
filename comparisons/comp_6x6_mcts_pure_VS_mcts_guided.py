@@ -187,3 +187,162 @@ Case B: Guided MCTS starts first (Guided = player 1)
   Pure wins:    8 / 24 (33.33%)
   Draws:        0 / 24 (0.00%)
 """
+
+"""temp=0.5
+=== TOTAL RUNTIME: 134.21 s ===
+Average Pure MCTS move time:   229.75 ms
+Average Guided MCTS move time: 230.52 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    4 / 24 (16.67%)
+  Guided wins:  20 / 24 (83.33%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  17 / 24 (70.83%)
+  Pure wins:    7 / 24 (29.17%)
+  Draws:        0 / 24 (0.00%)
+"""
+
+""""temp=0.1
+=== TOTAL RUNTIME: 175.34 s ===
+Average Pure MCTS move time:   365.05 ms
+Average Guided MCTS move time: 305.62 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    5 / 24 (20.83%)
+  Guided wins:  19 / 24 (79.17%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  19 / 24 (79.17%)
+  Pure wins:    5 / 24 (20.83%)
+  Draws:        0 / 24 (0.00%)
+"""
+
+"""temp=0.3
+=== TOTAL RUNTIME: 188.12 s ===
+Average Pure MCTS move time:   357.90 ms
+Average Guided MCTS move time: 300.30 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    2 / 24 (8.33%)
+  Guided wins:  22 / 24 (91.67%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  19 / 24 (79.17%)
+  Pure wins:    5 / 24 (20.83%)
+  Draws:        0 / 24 (0.00%)
+"""
+
+"""temp=10
+=== TOTAL RUNTIME: 236.89 s ===
+Average Pure MCTS move time:   353.13 ms
+Average Guided MCTS move time: 557.23 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    3 / 24 (12.50%)
+  Guided wins:  21 / 24 (87.50%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  18 / 24 (75.00%)
+  Pure wins:    6 / 24 (25.00%)
+  Draws:        0 / 24 (0.00%)
+"""
+
+"""temp=1
+=== TOTAL RUNTIME: 180.55 s ===
+Average Pure MCTS move time:   361.74 ms
+Average Guided MCTS move time: 322.01 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    3 / 24 (12.50%)
+  Guided wins:  21 / 24 (87.50%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  20 / 24 (83.33%)
+  Pure wins:    4 / 24 (16.67%)
+  Draws:        0 / 24 (0.00%)
+"""
+
+"""temp=0.05
+=== TOTAL RUNTIME: 203.50 s ===
+Average Pure MCTS move time:   352.15 ms
+Average Guided MCTS move time: 305.39 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    2 / 24 (8.33%)
+  Guided wins:  22 / 24 (91.67%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  18 / 24 (75.00%)
+  Pure wins:    6 / 24 (25.00%)
+  Draws:        0 / 24 (0.00%)
+"""
+
+"""temp=0.0001
+=== TOTAL RUNTIME: 401.09 s ===
+Average Pure MCTS move time:   381.31 ms
+Average Guided MCTS move time: 1773.56 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    2 / 24 (8.33%)
+  Guided wins:  22 / 24 (91.67%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  7 / 24 (29.17%)
+  Pure wins:    17 / 24 (70.83%)
+  Draws:        0 / 24 (0.00%)
+"""
+
+"""temp=1000
+=== TOTAL RUNTIME: 262.17 s ===
+Average Pure MCTS move time:   351.59 ms
+Average Guided MCTS move time: 593.37 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    5 / 24 (20.83%)
+  Guided wins:  19 / 24 (79.17%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  20 / 24 (83.33%)
+  Pure wins:    4 / 24 (16.67%)
+  Draws:        0 / 24 (0.00%)
+""" 
+
+"""0.01
+=== TOTAL RUNTIME: 386.31 s ===
+Average Pure MCTS move time:   384.89 ms
+Average Guided MCTS move time: 1793.93 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    6 / 24 (25.00%)
+  Guided wins:  18 / 24 (75.00%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  10 / 24 (41.67%)
+  Pure wins:    14 / 24 (58.33%)
+  Draws:        0 / 24 (0.00%)
+  """
+
+"""=== TOTAL RUNTIME: 437.74 s ===
+Average Pure MCTS move time:   388.50 ms
+Average Guided MCTS move time: 1856.20 ms
+
+Case A: Pure MCTS starts first (Pure = player 1)
+  Pure wins:    6 / 24 (25.00%)
+  Guided wins:  18 / 24 (75.00%)
+  Draws:        0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:  6 / 24 (25.00%)
+  Pure wins:    18 / 24 (75.00%)
+  Draws:        0 / 24 (0.00%)
+"""

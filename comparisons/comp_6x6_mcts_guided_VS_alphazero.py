@@ -217,3 +217,67 @@ Case B: Guided MCTS starts first (Guided = player 1)
   AlphaZero wins: 8 / 24 (33.33%)
   Draws:          0 / 24 (0.00%)
 """
+
+"""temp=0.5
+=== TOTAL RUNTIME: 139.28 s ===
+Average AlphaZero game time: 416.41 ms
+Average Guided MCTS game time: 280.42 ms
+
+Case A: AlphaZero starts first (AlphaZero = player 1)
+  AlphaZero wins: 24 / 24 (100.00%)
+  Guided wins:    0 / 24 (0.00%)
+  Draws:          0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:    20 / 24 (83.33%)
+  AlphaZero wins: 4 / 24 (16.67%)
+  Draws:          0 / 24 (0.00%)
+"""
+
+"""temp=0.1
+=== TOTAL RUNTIME: 110.77 s ===
+Average AlphaZero game time: 315.96 ms
+Average Guided MCTS game time: 279.82 ms
+
+Case A: AlphaZero starts first (AlphaZero = player 1)
+  AlphaZero wins: 24 / 24 (100.00%)
+  Guided wins:    0 / 24 (0.00%)
+  Draws:          0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:    19 / 24 (79.17%)
+  AlphaZero wins: 5 / 24 (20.83%)
+  Draws:          0 / 24 (0.00%)
+"""
+
+"""temp=1
+=== TOTAL RUNTIME: 132.28 s ===
+Average AlphaZero game time: 319.52 ms
+Average Guided MCTS game time: 294.40 ms
+
+Case A: AlphaZero starts first (AlphaZero = player 1)
+  AlphaZero wins: 24 / 24 (100.00%)
+  Guided wins:    0 / 24 (0.00%)
+  Draws:          0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:    20 / 24 (83.33%)
+  AlphaZero wins: 4 / 24 (16.67%)
+  Draws:          0 / 24 (0.00%)
+"""
+
+"""temp=0.3
+=== TOTAL RUNTIME: 125.16 s ===
+Average AlphaZero game time: 317.94 ms
+Average Guided MCTS game time: 277.43 ms
+
+Case A: AlphaZero starts first (AlphaZero = player 1)
+  AlphaZero wins: 24 / 24 (100.00%)
+  Guided wins:    0 / 24 (0.00%)
+  Draws:          0 / 24 (0.00%)
+
+Case B: Guided MCTS starts first (Guided = player 1)
+  Guided wins:    23 / 24 (95.83%)
+  AlphaZero wins: 1 / 24 (4.17%)
+  Draws:          0 / 24 (0.00%)
+"""

@@ -1,90 +1,74 @@
-# Gomoku-Game-Model
+# Gomoku AI Framework
 
-This project implements an artificial intelligence framework for **Gomoku** on a reduced board size (**6×6**) with a modified winning condition of **four consecutive stones**.  
-The reduced setting enables faster experimentation while preserving the essential strategic properties of adversarial board games.
+## Introduction / Project Purpose
+This project implements an artificial intelligence framework for **Gomoku** on reduced board sizes (**6×6** and **8×8**) with modified winning conditions: **four consecutive stones for 6×6** and **five consecutive stones for 8×8**.  
+The reduced setting enables faster experimentation while preserving the essential strategic and adversarial properties of Gomoku.  
 
----
-
-## Project Overview
-
-The project is structured in **two main stages**.
-
-### Stage 1: Minimax-Based AI
-
-The first stage focuses on implementing a **Minimax-based Gomoku AI**.  
-This stage establishes a clear and explicit game model, including:
-
-- board representation,
-- move generation,
-- terminal-state detection,
-- heuristic evaluation function.
-
-Beyond producing a playable AI, this stage serves to validate the correctness of the game mechanics and to identify the core components required for adversarial search.
-
-### Stage 2: Monte Carlo Tree Search (MCTS)
-
-Building on the Minimax foundation, the second stage—**the main objective of the project**—is the implementation of a **Monte Carlo Tree Search (MCTS)** algorithm.
-
-The prior Minimax implementation facilitates this transition by providing:
-
-- a well-defined game state representation,
-- reusable game logic (legal moves, terminal checks),
-- heuristic knowledge that can be adapted for rollout policies or node evaluation within MCTS.
+The framework includes classical **Minimax**, **heuristic evaluation**, **Monte Carlo Tree Search (MCTS)** variants, and **AlphaZero-style policy-value networks**, supporting both AI-vs-AI experiments and AI-vs-human play.
 
 ---
 
 ## Repository Structure
 
-- `EASY_GOMOKU/`  
-  Main source directory containing the Gomoku game model and AI implementations.
+### 1. `EASY_GOMOKU`  
+Implementation of Gomoku on a small board with baseline **Minimax** and evaluation functions. Includes scripts for training, evaluation, and gameplay.
 
-  - `EASY_GOMOKU_main.py`  
-    Entry point of the program. Handles game initialization and launches the interactive Gomoku game in the terminal.
-
-  - `EASY_GOMOKU_minimax.py`  
-    Implements the Minimax algorithm for adversarial search, including move selection for the AI player.
-
-  - `EASY_GOMOKU_class_board.py`  
-    Defines the board representation, game state, and core game mechanics such as legal move generation and terminal-state detection.
-
-  - `EASY_GOMOKU_class_shape.py`  
-    Encodes pattern (shape) detection logic used to identify strategic configurations on the board.
-
-  - `EASY_GOMOKU_evaluation_function.py`  
-    Implements the heuristic evaluation function based on detected board patterns, used by the Minimax algorithm to score game states.
-
-- Other files and directories  
-  Dedicated to documentation (Sphinx), experiments, or auxiliary materials.
+- `EASY_GOMOKU_class_board.py` – Board representation and legal move generation.  
+- `EASY_GOMOKU_class_shape.py` – Shape-based evaluation and pattern recognition.  
+- `EASY_GOMOKU_evaluation_function.py` – Heuristic evaluation function for Minimax.  
+- `EASY_GOMOKU_minimax.py` – Minimax implementation.  
+- `EASY_GOMOKU_main.py` – Entry point for playing or running experiments.  
+- `Makefile`, `make.bat` – Build and documentation scripts.
 
 ---
 
-## Documentation
-
-The codebase is fully documented using Sphinx. The generated HTML documentation can be found in `build/html/index.html`.
-
----
-
-## How to Run
-
-The game can be played directly in the terminal.
-
-1. Ensure you have a compatible Python environment.
-2. Navigate to the project root directory.
-3. Run the main file inside `EASY_GOMOKU`.
-
-The program launches an interactive Gomoku game, where a human player competes against the AI.
+### 2. `SPEEDUP_EASY_GOMOKU`  
+Optimized version of `EASY_GOMOKU` with performance improvements on evaluation and move generation.
 
 ---
 
-## Current Status
+### 3. `Gomoku_8_8`  
+Gomoku on an 8×8 board with advanced agents:
 
-- **Minimax-based AI**: implemented and functional.
-- **MCTS**: under development.
-- Board size and winning condition are intentionally simplified for clarity and computational efficiency.
+- `GOMOKU_8x8_minimax.py` – Minimax agent.  
+- `GOMOKU_8x8_eval.py` – Evaluation function for heuristic agents.  
+- `GOMOKU_8x8_main.py` – Main entry point.  
+- `best_policy_8_8_5.model` – Pretrained policy network for AlphaZero-style MCTS.
 
 ---
 
-## References
+### 4. `Monte_Carlo_guided_GOMOKU`  
+Contains MCTS variants for 6×6 Gomoku:
 
-- Russell, S., & Norvig, P. *Artificial Intelligence: A Modern Approach*. Pearson.
-- Browne, C. B., et al. *A Survey of Monte Carlo Tree Search Methods*. IEEE TCIAIG, 2012.
+- `mcts_pure.py` – Standard MCTS with random rollouts.  
+- `mcts_guided.py` – MCTS guided by heuristic evaluation.  
+- `mcts_alphaZero.py` – MCTS guided by a policy-value network.  
+- `policy_value_net_numpy.py` – Numpy implementation of policy-value network.  
+- Human play scripts (`*_human_play.py`) for interactive testing.  
+- `best_policy_6_6_4.model` – Pretrained policy network.
+
+---
+
+### 5. `mcts`  
+General-purpose MCTS implementation with variants:
+
+- `mcts_pure.py` – Vanilla MCTS.  
+- `mcts_heuristic.py` – Heuristic-guided MCTS.  
+- `mcts_alphaZero.py` – Policy-value guided MCTS.  
+- `policy_value_net_numpy.py` – Numpy policy-value network backend.  
+- `game.py`, `human_play.py` – Game loop and interactive play.
+
+---
+
+### 6. `comparisons`  
+Scripts to compare different AI agents under controlled experiments:
+
+- Scripts for 6×6 and 8×8 boards.  
+- Matchups include: Minimax vs MCTS variants, MCTS pure vs guided, and AlphaZero vs heuristic.  
+- Results can be used to analyze agent performance under different strategies and board sizes.
+
+---
+
+## Installation / Requirements
+- Python 3.10+  
+- NumPy
