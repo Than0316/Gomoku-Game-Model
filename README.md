@@ -73,3 +73,6 @@ Scripts to compare different AI agents under controlled experiments:
 ## Installation / Requirements
 - Python 3.10+  
 - NumPy
+
+## Final Report
+[Final Report](https://github.com/Than0316/Gomoku-Game-Model/blob/main/Gomoku_Final_Report__Tianyi_Aghasi.pdf)
